@@ -39,6 +39,11 @@ Start the server
 ```bash
   npm start
 ```
+To Start the backend Open your terminal, navigate to the project directory, and execute:
+
+```
+  node server.js
+```
 
 
 
@@ -48,6 +53,8 @@ Start the server
 * [Redux](https://redux.js.org/)
 * [Bootstrap](https://getbootstrap.com/)
 * [Fake Store API](https://fakestoreapi.com/)
+* [Node.js](https://nodejs.org/)
+* [Express](https://expressjs.com/)
 
 ## Contributing
 
