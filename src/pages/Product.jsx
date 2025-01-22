@@ -22,21 +22,40 @@ const Product = () => {
 
     useEffect(() => {
         const getProduct = async () => {
-            setLoading(true);
-            setLoading2(true);
-            const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-            const data = await response.json();
-            setProduct(data);
-            setLoading(false);
-            const response2 = await fetch(
-                `https://fakestoreapi.com/products/category/${data.category}`
-            );
-            const data2 = await response2.json();
-            setSimilarProducts(data2);
-            setLoading2(false);
+            try {
+                setLoading(true);
+                setLoading2(true);
+
+                // Fetch single product
+                const response = await fetch(`http://localhost:5000/products/${id}`);
+                if (!response.ok) {
+                    throw new Error("Product not found");
+                }
+                const data = await response.json();
+                setProduct(data);
+                setLoading(false);
+
+                // Fetch similar products by category
+                const response2 = await fetch(
+                    `http://localhost:5000/products/category/${data.category}`
+                );
+                if (!response2.ok) {
+                    throw new Error("Failed to fetch similar products");
+                }
+                const data2 = await response2.json();
+                setSimilarProducts(data2);
+                setLoading2(false);
+            } catch (error) {
+                console.error("Error fetching product or similar products:", error);
+                // You can set an error state here to display an error message to the user
+                setLoading(false);
+                setLoading2(false);
+            }
         };
+
         getProduct();
     }, [id]);
+
 
     const Loading = () => {
         return (
