@@ -28,7 +28,7 @@ app.post("/register", (req, res) => {
 
     // Check if email already exists with the same role
     if (users.find((user) => user.email === email && user.role === role)) {
-        return res.status(400).json({error: "Email already registered with this role"});
+        return res.status(400).json({error: "Email already registered"});
     }
     // Add new user
     users.push({fullName, email, password, role});
